@@ -23,7 +23,7 @@ The `warehouse-optimization` project provides a solution for optimizing warehous
 1. **Clone the repository:**
 
     ```bash
-    git clone <https://github.com/fzunic7/warehouse-optimization.git>
+    git clone https://github.com/fzunic7/warehouse-optimization.git
     ```
 
 2. **Navigate to the project directory:**
