@@ -3,7 +3,7 @@ const { optimizeSchema } = require('../validation/warehouseValidation')
 
 class WarehouseController {
   constructor() {
-    this.warehouseService = new WarehouseService();
+    this.warehouseService = new WarehouseService()
   }
 
   optimize(req, res) {
@@ -21,4 +21,4 @@ class WarehouseController {
   }
 }
 
-module.exports = WarehouseController;
+module.exports = WarehouseController

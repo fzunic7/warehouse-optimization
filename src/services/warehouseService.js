@@ -1,76 +1,86 @@
+const sortItems = require('../utils/sortItems')
+
 class WarehouseService {
-  // Function to check if all dependency items of an current item are met
+  /**
+   * Checks if all dependencies of a given item have been added to the selected items.
+   * @param {Array} selectedItems - The array of items that have already been selected.
+   * @param {Object} item - The item whose dependencies need to be checked.
+   * @returns {boolean} - Returns true if all dependencies of the item are in the selected items, otherwise false.
+   */
   isDependencyAdded(selectedItems, item) {
     const selectedNamesSet = new Set(
       selectedItems.map((selectedItem) => selectedItem.name)
-    );
+    )
 
     for (let dependency of item.dependencies) {
       if (!selectedNamesSet.has(dependency)) {
-        return false;
+        return false
       }
     }
 
-    return true;
+    return true
   }
 
-  // Function to optimize the selection of warehouse items
+  /**
+   * Optimizes the selection of warehouse items to maximize total value while respecting space constraints, priorities, and dependencies.
+   * @param {Array} items - The list of items available for selection.
+   * @param {number} totalSpace - The total available space in the warehouse.
+   * @returns {Object} - An object containing the maximum total value and the best combination of selected items.
+   */
   optimizeWarehouseItems(items, totalSpace) {
-    // Sort items by priority, then by value
-    items.sort((a, b) => {
-      if (a.priority !== b.priority) {
-        return a.priority - b.priority;
-      }
-      return b.value - a.value;
-    });
+    const sortedItems = sortItems(items)
 
     // Initialize arrays for maximum value and best combination of items
-    const itemsMaxValue = new Array(totalSpace + 1).fill(0);
-    const selectedItems = new Array(totalSpace + 1).fill(null).map(() => []);
+    const itemsMaxValue = new Array(totalSpace + 1).fill(0)
+    const selectedItems = new Array(totalSpace + 1).fill(null).map(() => [])
 
     // Initialize array to avoid storing duplicates
     const alreadyAdded = new Array(totalSpace + 1)
       .fill(null)
-      .map(() => new Set());
+      .map(() => new Set())
 
     // Iterate from 1 to given totalSpace
     for (let spaceCapacity = 1; spaceCapacity <= totalSpace; spaceCapacity++) {
-      let maxValue = itemsMaxValue[spaceCapacity];
-      let bestCombo = [...selectedItems[spaceCapacity]];
+      let maxValue = itemsMaxValue[spaceCapacity]
+      let bestCombo = [...selectedItems[spaceCapacity]]
 
-      // Iterate the items
-      items.forEach((item) => {
-        if (item.size <= spaceCapacity) {
-          const spaceLeft = spaceCapacity - item.size;
+      // Filter the sorted items to include only those that fit within the remaining space capacity
+      const filteredItems = sortedItems.filter(
+        (sortedItem) => sortedItem.size <= spaceCapacity
+      )
 
-          // Check if dependencies are met and the item wasn't added before
-          if (
-            this.isDependencyAdded(selectedItems[spaceLeft], item) &&
-            !alreadyAdded[spaceLeft].has(item.name)
-          ) {
-            const potentialValue = itemsMaxValue[spaceLeft] + item.value;
+      // Iterate filtered items
+      filteredItems.forEach((filteredItem) => {
+        const spaceLeft = spaceCapacity - filteredItem.size
+        const areDependenciesMet = this.isDependencyAdded(
+          selectedItems[spaceLeft],
+          filteredItem
+        )
+        const isItemAdded = alreadyAdded[spaceLeft].has(filteredItem.name)
 
-            // Update the best combination based on potential value
-            if (potentialValue > maxValue) {
-              maxValue = potentialValue;
-              bestCombo = [...selectedItems[spaceLeft], item];
-            }
+        if (areDependenciesMet && !isItemAdded) {
+          const potentialValue = itemsMaxValue[spaceLeft] + filteredItem.value
+
+          // Update the best combination based on potential value
+          if (potentialValue > maxValue) {
+            maxValue = potentialValue
+            bestCombo = [...selectedItems[spaceLeft], filteredItem]
           }
         }
-      });
+      })
 
       // Step 8: Update the arrays with the best results for this capacity
-      itemsMaxValue[spaceCapacity] = maxValue;
-      selectedItems[spaceCapacity] = bestCombo;
-      alreadyAdded[spaceCapacity] = new Set(bestCombo.map((i) => i.name));
+      itemsMaxValue[spaceCapacity] = maxValue
+      selectedItems[spaceCapacity] = bestCombo
+      alreadyAdded[spaceCapacity] = new Set(bestCombo.map((i) => i.name))
     }
 
     // Step 9: Return max value and selected combination of items
     return {
       totalValue: itemsMaxValue[totalSpace],
-      selectedItems: selectedItems[totalSpace],
-    };
+      selectedItems: selectedItems[totalSpace]
+    }
   }
 }
 
-module.exports = WarehouseService;
+module.exports = WarehouseService

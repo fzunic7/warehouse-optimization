@@ -22,69 +22,69 @@ The `warehouse-optimization` project provides a solution for optimizing warehous
 
 1. **Clone the repository:**
 
-    ```bash
-    git clone https://github.com/fzunic7/warehouse-optimization.git
-    ```
+   ```bash
+   git clone https://github.com/fzunic7/warehouse-optimization.git
+   ```
 
 2. **Navigate to the project directory:**
 
-    ```bash
-    cd warehouse-optimization
-    ```
+   ```bash
+   cd warehouse-optimization
+   ```
 
 3. **Install dependencies:**
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 ## Scripts
 
 - **Start the Application:**
 
-    ```bash
-    npm start
-    ```
+  ```bash
+  npm start
+  ```
 
   This command starts the application in production mode.
 
 - **Development Mode:**
 
-    ```bash
-    npm run dev
-    ```
+  ```bash
+  npm run dev
+  ```
 
   This command starts the application with `nodemon` for automatic restarts during development.
 
 - **Run Tests:**
 
-    ```bash
-    npm test
-    ```
+  ```bash
+  npm test
+  ```
 
   This command runs tests using Jest.
 
 - **Format Code:**
 
-    ```bash
-    npm run format
-    ```
+  ```bash
+  npm run format
+  ```
 
   This command formats the code using Prettier.
 
 - **Lint Code:**
 
-    ```bash
-    npm run lint
-    ```
+  ```bash
+  npm run lint
+  ```
 
   This command runs ESLint to check for code quality issues.
 
 - **Fix Lint Issues:**
 
-    ```bash
-    npm run lint:fix
-    ```
+  ```bash
+  npm run lint:fix
+  ```
 
   This command automatically fixes linting issues.
 
@@ -104,37 +104,37 @@ The API is documented using Swagger. To access the Swagger UI:
 - **Description:** Optimize warehouse inventory to maximize value while considering space constraints, priorities, and dependencies.
 - **Request Body:**
 
-    ```json
-    {
-      "items": [
-        {
-          "name": "Item Name",
-          "size": 10,
-          "value": 100,
-          "priority": 1,
-          "dependencies": ["Dependency Item Name"]
-        }
-      ],
-      "total_space": 100
-    }
-    ```
+  ```json
+  {
+    "items": [
+      {
+        "name": "Item Name",
+        "size": 10,
+        "value": 100,
+        "priority": 1,
+        "dependencies": ["Dependency Item Name"]
+      }
+    ],
+    "total_space": 100
+  }
+  ```
 
 - **Response:**
 
-    ```json
-    {
-      "selectedItems": [
-        {
-          "name": "Item Name",
-          "size": 10,
-          "value": 100,
-          "priority": 1,
-          "dependencies": ["Dependency Item Name"]
-        }
-      ],
-      "totalValue": 100
-    }
-    ```
+  ```json
+  {
+    "selectedItems": [
+      {
+        "name": "Item Name",
+        "size": 10,
+        "value": 100,
+        "priority": 1,
+        "dependencies": ["Dependency Item Name"]
+      }
+    ],
+    "totalValue": 100
+  }
+  ```
 
 ## Author
 
