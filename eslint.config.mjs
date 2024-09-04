@@ -9,7 +9,7 @@ export default [
     languageOptions: {
       parser: parserTs,
       parserOptions: {
-        ecmaVersion: 2016,
+        ecmaVersion: 2023,
         sourceType: 'module'
       }
     },
