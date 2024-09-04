@@ -1,9 +1,11 @@
+import { Item } from '../types/item'
+
 /**
  * Sorts the items based on priority and value.
  * @param {Array} items - Array of item objects.
  * @returns {Array} - A new sorted array of items.
  */
-function sortItems(items) {
+function sortItems(items: Item[]): Item[] {
   // Create a copy of the items array to avoid mutating the original array
   const sortedItems = [...items]
 
@@ -18,4 +20,4 @@ function sortItems(items) {
   return sortedItems
 }
 
-module.exports = sortItems
+export default sortItems

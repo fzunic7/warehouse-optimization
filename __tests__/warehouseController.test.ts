@@ -1,12 +1,11 @@
-/* eslint-disable no-undef */
-const httpMocks = require('node-mocks-http')
-const WarehouseController = require('../src/controllers/warehouseController')
-const WarehouseService = require('../src/services/warehouseService')
+import httpMocks from 'node-mocks-http'
+import WarehouseController from '../src/controllers/warehouseController'
+import WarehouseService from '../src/services/warehouseService'
 
 jest.mock('../src/services/warehouseService')
 
 describe('WarehouseController', () => {
-  let controller
+  let controller: WarehouseController
 
   beforeEach(() => {
     controller = new WarehouseController()
@@ -36,9 +35,12 @@ describe('WarehouseController', () => {
         ]
       }
     })
+
     const res = httpMocks.createResponse()
 
-    WarehouseService.prototype.optimizeWarehouseItems.mockReturnValue({
+    ;(
+      WarehouseService.prototype.optimizeWarehouseItems as jest.Mock
+    ).mockReturnValue({
       totalValue: 950,
       selectedItems: [
         {
@@ -88,6 +90,7 @@ describe('WarehouseController', () => {
       url: '/api/optimize',
       body: { total_space: -1, items: [] }
     })
+
     const res = httpMocks.createResponse()
 
     await controller.optimize(req, res)

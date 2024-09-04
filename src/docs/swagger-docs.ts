@@ -58,3 +58,5 @@
  *                 totalValue:
  *                   type: integer
  */
+
+export {}

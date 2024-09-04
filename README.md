@@ -17,6 +17,7 @@ The `warehouse-optimization` project provides a solution for optimizing warehous
 - **Joi:** Schema validation for request data.
 - **Swagger:** API documentation and interactive UI.
 - **Jest:** Testing framework for unit and integration tests.
+- **TypeScript:** Provides static typing for better development experience and code quality.
 
 ## Installation
 
@@ -36,6 +37,12 @@ The `warehouse-optimization` project provides a solution for optimizing warehous
 
    ```bash
    npm install
+   ```
+
+4. **Compile TypeScript to JavaScript::**
+
+   ```bash
+   npm run build
    ```
 
 ## Scripts
