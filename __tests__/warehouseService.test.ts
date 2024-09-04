@@ -1,15 +1,15 @@
-/* eslint-disable no-undef */
-const WarehouseService = require('../src/services/warehouseService')
+import WarehouseService from '../src/services/warehouseService'
+import { Item } from '../src/types/item'
 
 describe('WarehouseService', () => {
-  let service
+  let service: WarehouseService
 
   beforeEach(() => {
     service = new WarehouseService()
   })
 
   test('should correctly optimize warehouse items', () => {
-    const items = [
+    const items: Item[] = [
       {
         name: 'Coffee Table',
         size: 10,
@@ -57,7 +57,7 @@ describe('WarehouseService', () => {
   })
 
   test('should handle empty items array', () => {
-    const items = []
+    const items: Item[] = []
     const totalSpace = 30
 
     const result = service.optimizeWarehouseItems(items, totalSpace)
@@ -67,7 +67,7 @@ describe('WarehouseService', () => {
   })
 
   test('should handle case where no item fits in the space', () => {
-    const items = [
+    const items: Item[] = [
       {
         name: 'Large Item',
         size: 100,

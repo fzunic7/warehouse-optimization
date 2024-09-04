@@ -1,9 +1,9 @@
-const express = require('express')
-const swaggerUi = require('swagger-ui-express')
-const swaggerSpec = require('./config/swagger')
-const warehouseRoutes = require('./routes/warehouseRoutes')
+import express, { Express } from 'express'
+import swaggerUi from 'swagger-ui-express'
+import swaggerSpec from './config/swagger'
+import warehouseRoutes from './routes/warehouseRoutes'
 
-const app = express()
+const app: Express = express()
 
 app.use(express.json())
 
@@ -11,7 +11,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 app.use('/api', warehouseRoutes)
 
-const PORT = process.env.PORT || 3000
+const PORT: number = parseInt(process.env.PORT as string, 10) || 3000
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
   console.log(`Swagger docs available at http://localhost:${PORT}/api-docs`)

@@ -1,6 +1,6 @@
-const Joi = require('joi')
+import Joi, { ObjectSchema } from 'joi'
 
-const itemSchema = Joi.object({
+const itemSchema: ObjectSchema = Joi.object({
   name: Joi.string().required(),
   size: Joi.number().integer().positive().required(),
   value: Joi.number().integer().positive().required(),
@@ -8,9 +8,9 @@ const itemSchema = Joi.object({
   dependencies: Joi.array().items(Joi.string()).required()
 })
 
-const optimizeSchema = Joi.object({
+const optimizeSchema: ObjectSchema = Joi.object({
   total_space: Joi.number().integer().positive().required(),
   items: Joi.array().items(itemSchema).required()
 })
 
-module.exports = { optimizeSchema }
+export { optimizeSchema }
